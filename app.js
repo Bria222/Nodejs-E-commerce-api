@@ -2,7 +2,7 @@ const express = require('express')
 const createError = require('http-errors')
 const morgan = require('morgan')
 const mongoose = require('mongoose')
-
+const app = express()
 require('dotenv').config()
 mongoose
   .connect(process.env.MONGODB_URI)
@@ -12,8 +12,9 @@ mongoose
   .catch((err) => {
     console.log(err)
   })
+app.use(express.json())
 const authRoute = require('./routes/auth_routes')
-const app = express()
+
 app.use(morgan('dev'))
 port = process.env.PORT || 5000
 
