@@ -97,6 +97,6 @@ Auth0 helps you to:
 
 Postman provides a powerful GUI platform to make your API development faster & easier, from building API requests through testing, documentation and sharing
 
-Here is a [small collection](https://documenter.getpostman.com/view/3232248/https://github.com/Bria222/Node-js-Shop-api/) to highlight the features of this sample API.
+Here is a [small collection](https://documenter.getpostman.com/view/17773746/2s9YXceQec/) to highlight the features of this sample API.
 
 [![Run NodeJS JWT Authentication in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/c57ddc507592c436662c)
