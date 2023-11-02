@@ -1,6 +1,6 @@
 const CryptoJS = require('crypto-js')
 const User = require('../models/user') // Assuming your user model is exported as "User"
-
+const jwt = require('jsonwebtoken')
 const registerUser = async (req, res, next) => {
   const newUser = new User({
     username: req.body.username,
@@ -37,9 +37,16 @@ const loginUser = async (req, res, next) => {
     if (decryptedPassword !== password) {
       return res.status(401).json('Wrong password credentials')
     }
-
+    const accessToken = jwt.sign(
+      {
+        id: user._id,
+        isAdmin: user.isAdmin,
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: '1day' }
+    )
     const { password: userPassword, ...others } = user._doc
-    res.status(200).json(others)
+    res.status(200).json({ others, accessToken })
   } catch (error) {
     res.status(500).json(error)
     console.log(error)
