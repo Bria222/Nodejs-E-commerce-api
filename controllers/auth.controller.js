@@ -46,7 +46,7 @@ const loginUser = async (req, res, next) => {
       { expiresIn: '1day' }
     )
     const { password: userPassword, ...others } = user._doc
-    res.status(200).json({ others, accessToken })
+    res.status(200).json({ ...others, accessToken })
   } catch (error) {
     res.status(500).json(error)
     console.log(error)
