@@ -18,7 +18,7 @@ const OrderSchema = new mongoose.Schema(
       required: true,
     },
     address: {
-      type: object,
+      type: Object,
       required: true,
     },
     status: {
