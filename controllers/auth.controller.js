@@ -25,7 +25,7 @@ const loginUser = async (req, res, next) => {
     const user = await User.findOne({ username })
 
     if (!user) {
-      return res.status(401).json('Wrong login credentials') // Handle the case where the user is not found
+      return res.status(401).json('Wrong Login credentials')
     }
 
     const hashedPassword = CryptoJS.AES.decrypt(
@@ -38,7 +38,8 @@ const loginUser = async (req, res, next) => {
       return res.status(401).json('Wrong password credentials')
     }
 
-    res.status(200).json(user)
+    const { password: userPassword, ...others } = user._doc
+    res.status(200).json(others)
   } catch (error) {
     res.status(500).json(error)
     console.log(error)
