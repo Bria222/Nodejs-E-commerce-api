@@ -16,7 +16,7 @@ mongoose
 
 app.use(express.json())
 
-const authRoute = require('./routes/auth_routes')
+const authRoute = require('./routes/auth')
 
 app.use(morgan('dev'))
 

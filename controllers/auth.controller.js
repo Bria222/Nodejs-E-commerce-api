@@ -1,3 +1,4 @@
+const CryptoJS = require('crypto-js')
 const user = require('../models/user')
 
 const loginUser = async (req, res, next) => {
@@ -7,7 +8,10 @@ const registerUser = async (req, res, next) => {
   const newUser = new user({
     username: req.body.username,
     email: req.body.email,
-    password: req.body.password,
+    password: CryptoJS.AES.encrypt(
+      req.body.password,
+      process.env.PASSWORD_SECRET_KEY.toString()
+    ),
   })
   try {
     const savedUser = await newUser.save()
