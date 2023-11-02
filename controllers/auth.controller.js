@@ -1,9 +1,6 @@
 const CryptoJS = require('crypto-js')
 const user = require('../models/user')
 
-const loginUser = async (req, res, next) => {
-  res.status(200).json({ status: 'succes' })
-}
 const registerUser = async (req, res, next) => {
   const newUser = new user({
     username: req.body.username,
@@ -20,5 +17,10 @@ const registerUser = async (req, res, next) => {
     res.status(500).json(error)
     console.log(error)
   }
+}
+
+// login user
+const loginUser = async (req, res, next) => {
+  res.status(200).json({ status: 'succes' })
 }
 module.exports = { registerUser, loginUser }

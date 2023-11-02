@@ -16,14 +16,13 @@ mongoose
 
 app.use(express.json())
 
-const authRoute = require('./routes/auth')
-
 app.use(morgan('dev'))
 
 const port = process.env.PORT || 5000
 
-app.use('/register', authRoute)
-app.use('/login', authRoute)
+const authRoute = require('./routes/auth')
+app.use('/api/v1', authRoute)
+app.use('/api/v1', authRoute)
 
 app.listen(port, () => {
   console.log(`App is listening on port ${port}`)
