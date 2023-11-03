@@ -6,6 +6,8 @@ This e-commerce shop API, developed using Node.js and Express, offers a seamless
 
 ## _[Nodejs,express,mangoDb]_
 
+## run on postman [Postman API Documentation](https://documenter.getpostman.com/view/17773746/2s9YXe7Pdt#cd09df62-3b90-42a5-a997-b0bfe7cc1c88)
+
 ## usage
 
 ### register http://localhost:5000/api/auth/register
