@@ -1,99 +1,39 @@
-const Order = require("../models/Order");
+const {
+  createOrder,
+  updateOrder,
+  deleteOrder,
+  getUserOrders,
+  getAllOrders,
+  getMonthlyIncome,
+} = require('../controllers/order')
+
 const {
   verifyToken,
   verifyTokenAndAuthorization,
   verifyTokenAndAdmin,
-} = require("./verifyToken");
+} = require('./verifyToken')
 
-const router = require("express").Router();
+const router = require('express').Router()
 
 //CREATE
 
-router.post("/", verifyToken, async (req, res) => {
-  const newOrder = new Order(req.body);
-
-  try {
-    const savedOrder = await newOrder.save();
-    res.status(200).json(savedOrder);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+router.post('/', verifyToken, createOrder)
 
 //UPDATE
-router.put("/:id", verifyTokenAndAdmin, async (req, res) => {
-  try {
-    const updatedOrder = await Order.findByIdAndUpdate(
-      req.params.id,
-      {
-        $set: req.body,
-      },
-      { new: true }
-    );
-    res.status(200).json(updatedOrder);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+router.put('/:id', verifyTokenAndAdmin, updateOrder)
 
 //DELETE
-router.delete("/:id", verifyTokenAndAdmin, async (req, res) => {
-  try {
-    await Order.findByIdAndDelete(req.params.id);
-    res.status(200).json("Order has been deleted...");
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+router.delete('/:id', verifyTokenAndAdmin, deleteOrder)
 
 //GET USER ORDERS
-router.get("/find/:userId", verifyTokenAndAuthorization, async (req, res) => {
-  try {
-    const orders = await Order.find({ userId: req.params.userId });
-    res.status(200).json(orders);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+router.get('/find/:userId', verifyTokenAndAuthorization, getUserOrders)
 
 // //GET ALL
 
-router.get("/", verifyTokenAndAdmin, async (req, res) => {
-  try {
-    const orders = await Order.find();
-    res.status(200).json(orders);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
+router.get('/', verifyTokenAndAdmin, getAllOrders)
 
 // GET MONTHLY INCOME
 
-router.get("/income", verifyTokenAndAdmin, async (req, res) => {
-  const date = new Date();
-  const lastMonth = new Date(date.setMonth(date.getMonth() - 1));
-  const previousMonth = new Date(new Date().setMonth(lastMonth.getMonth() - 1));
+router.get('/income', verifyTokenAndAdmin, getMonthlyIncome)
 
-  try {
-    const income = await Order.aggregate([
-      { $match: { createdAt: { $gte: previousMonth } } },
-      {
-        $project: {
-          month: { $month: "$createdAt" },
-          sales: "$amount",
-        },
-      },
-      {
-        $group: {
-          _id: "$month",
-          total: { $sum: "$sales" },
-        },
-      },
-    ]);
-    res.status(200).json(income);
-  } catch (err) {
-    res.status(500).json(err);
-  }
-});
-
-module.exports = router;
+module.exports = router
