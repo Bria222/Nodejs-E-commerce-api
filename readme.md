@@ -1,4 +1,14 @@
-## register http://localhost:5000/api/auth/register
+# E-commerce Shop API with Stripe Payment
+
+This e-commerce shop API, developed using Node.js and Express, offers a seamless and secure platform for online shopping. It enables customers to browse a wide range of products, add items to their cart, and complete transactions with the added convenience and trust of Stripe payment processing.
+
+## technologies
+
+[Nodejs,express,]
+
+## usage
+
+### register http://localhost:5000/api/auth/register
 
 `{
   "username":"brian",
@@ -6,7 +16,7 @@
   "password":"1234"
 }`
 
-## login http://localhost:5000/api/auth/login
+### login http://localhost:5000/api/auth/login
 
 `{
   "username":"brian",
@@ -15,7 +25,7 @@
 
 ### get users http://localhost:5000/api/users
 
-## PUT to update user http://localhost:5000/api/users/userId
+### PUT to update user http://localhost:5000/api/users/userId
 
 `{
 "username":"peterupdated",
