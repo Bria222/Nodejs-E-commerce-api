@@ -4,7 +4,7 @@ This e-commerce shop API, developed using Node.js and Express, offers a seamless
 
 ## technologies
 
-[Nodejs,express,]
+## _[Nodejs,express,mangoDb]_
 
 ## usage
 
