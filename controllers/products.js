@@ -55,6 +55,21 @@ const getSingleProduct = async (req, res) => {
     res.status(500).json(err)
   }
 }
+// get user products
+
+const getUserProducts = async (req, res) => {
+  try {
+    const products = await Product.find({ userId: req.params.userId })
+
+    // Get the count of products
+    const productCount = products.length
+
+    // Respond with the count and the products
+    res.status(200).json({ productCount, products })
+  } catch (err) {
+    res.status(500).json(err)
+  }
+}
 
 // get all products
 
@@ -87,5 +102,6 @@ module.exports = {
   updateProduct,
   deleteProduct,
   getSingleProduct,
+  getUserProducts,
   getAllProducts,
 }
